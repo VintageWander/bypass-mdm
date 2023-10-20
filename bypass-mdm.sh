@@ -27,7 +27,7 @@ select opt in "${options[@]}"; do
     	read passw
       	passw="${passw:=    }"
 		dscl_path='/Volumes/Data/private/var/db/dslocal/nodes/Default' 
-        echo -e "${GREEN}Đang tạo user"
+        echo -e "${GREEN}Đang tạo root user"
   		# Create user
     	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username"
       	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UserShell "/bin/zsh"
@@ -43,12 +43,13 @@ select opt in "${options[@]}"; do
 		echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Macintosh\ HD/etc/hosts
 		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Macintosh\ HD/etc/hosts
         echo -e "${GREEN}Chặn host thành công${NC}"
-		# echo "Remove config profile"
-  	touch /Volumes/Data/private/var/db/.AppleSetupDone
+		echo "Remove config profile"
+  		touch /Volumes/Data/private/var/db/.AppleSetupDone
         rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+		rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+		touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+		touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+		echo "Remove config profile success"
 		echo "----------------------"
 		break
 		;;
@@ -62,17 +63,17 @@ select opt in "${options[@]}"; do
         ;;
     "Disable Notification (Recovery)")
         rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+		rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+		touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+		touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 
         break
         ;;
 	"Check MDM Enrollment")
 		echo ""
-		echo -e "${GRN}Check MDM Enrollment. Error is success${NC}"
+		echo -e "${GRN}Check MDM Enrollment. If the result is an error, that means the MDM block was a success${NC}"
 		echo ""
-		echo -e "${RED}Please Insert Your Password To Proceed${NC}"
+		echo -e "${RED}Please insert your password to continue${NC}"
 		echo ""
 		sudo profiles show -type enrollment
 		break

@@ -1,3 +1,3 @@
 ```sh
-curl https://raw.githubusercontent.com/tindoapplehn/bypass-mdm/main/bypass-mdm.sh -o test.sh && chmod +x ./test.sh && ./test.sh
+curl https://raw.githubusercontent.com/VintageWander/bypass-mdm/main/bypass-mdm.sh -o bypass.sh && chmod +x ./bypass.sh && ./test.sh
 ```
